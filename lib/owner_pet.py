@@ -5,10 +5,10 @@ class Pet:
     PET_TYPES = ["dog", "cat", "rodent", "bird", "reptile", "exotic"]
     all = []
 
-    def __init__(self, name, pet_type, owner = None):
+    def __init__(self, name, pet_type, owner= None):
         self.name = name
         self.pet_type = pet_type
-        self.owner = owner
+        self._owner = owner
         Pet.all.append(self)
 
     @property
@@ -27,9 +27,18 @@ class Pet:
     @pet_type.setter
     def pet_type(self, pet_type):
         if pet_type not in self.PET_TYPES:
-            raise ValueError ("pet_type must be one in PET_TYPES")
+            raise ValueError("pet_type must be one in PET_TYPES")
 
         self._pet_type = pet_type
+
+    @property
+    def owner(self):
+        return self._owner  
+    @owner.setter
+    def owner (self, value):
+        if not isinstance (value, Owner):
+            raise TypeError("Owner must be an instance of the Owner Class")
+        self._owner = value
 
         
 
